@@ -1,0 +1,102 @@
+public class Water
+{
+    private double amountsOfWater;
+    private double howMuchWaterLeft;
+    private double waterDrank;
+    private String waterLeft;
+    public static final double WATER_INTAKE_100 = 100;
+    public static final double WATER_INTAKE_150 = 150;
+    public static final double WATER_INTAKE_200 = 200;
+    public static final double INVALID = 0.1;
+    public Water(double weightClass)
+    {
+        if (weightClass >= 0 && weightClass <= 100)
+        {
+            amountsOfWater = WATER_INTAKE_100;
+        }
+        else if (weightClass > 100 && weightClass <= 150)
+        {
+            amountsOfWater = WATER_INTAKE_150;
+        }
+        else if (weightClass >150  && weightClass <= 200)
+        {
+            amountsOfWater = WATER_INTAKE_200;
+        }
+        else 
+        {
+            amountsOfWater = INVALID;
+        }
+    }
+    public String recommendedAmount()//output
+    {
+        if (amountsOfWater == INVALID)
+        { 
+            return "0";
+        }
+        else    
+        {
+            return "The recommended amount of water you should drink is: " + amountsOfWater + " ounces of water.";
+        }
+    }
+    public void drinkWater(double drinkThisAmount)
+    {
+        if (drinkThisAmount >= 0 && drinkThisAmount <= WATER_INTAKE_100)
+        {
+            howMuchWaterLeft = amountsOfWater - drinkThisAmount;
+            amountsOfWater = howMuchWaterLeft;
+            waterDrank = drinkThisAmount;
+        }
+        else if (drinkThisAmount > WATER_INTAKE_100 && drinkThisAmount <= WATER_INTAKE_150)
+        {
+            howMuchWaterLeft = amountsOfWater - drinkThisAmount;
+            amountsOfWater = howMuchWaterLeft;
+            waterDrank = drinkThisAmount;
+        }
+        else if (drinkThisAmount > WATER_INTAKE_150 && drinkThisAmount <= WATER_INTAKE_200)
+        {
+            howMuchWaterLeft = amountsOfWater - drinkThisAmount;
+            amountsOfWater = howMuchWaterLeft;
+            waterDrank = drinkThisAmount;
+        }
+        else 
+        {
+             howMuchWaterLeft = INVALID;
+             waterDrank = INVALID;
+        }
+        
+        if (howMuchWaterLeft <= 0.0)
+        {
+            howMuchWaterLeft = 0.0;
+        }
+    }
+    public String waterLeft()
+    {
+        if (howMuchWaterLeft == INVALID)
+        {
+            waterLeft = "0.000";
+            
+        }
+        else if (howMuchWaterLeft == 0.0)
+        {
+            waterLeft = "Congratulations, you drank " + waterDrank + " ounces of water and have met your daily recommended water intake!";
+            
+        }
+        else
+        {
+            waterLeft = "You drank " + waterDrank + " ounces of water and you have " + howMuchWaterLeft + " ounces of water left to drink.";
+            
+        }
+        return waterLeft;
+    }
+    public Boolean congratulate()
+    {
+        if (waterLeft.contains("Congratulations"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
