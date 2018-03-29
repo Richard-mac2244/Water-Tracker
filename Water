@@ -8,6 +8,11 @@ public class Water
     public static final double WATER_INTAKE_150 = 150;
     public static final double WATER_INTAKE_200 = 200;
     public static final double INVALID = 0.1;
+    
+    /**
+     * Creates a new water object.
+     * @param weightClass the weight input of the user
+     */
     public Water(double weightClass)
     {
         if (weightClass >= 0 && weightClass <= 100)
@@ -27,7 +32,12 @@ public class Water
             amountsOfWater = INVALID;
         }
     }
-    public String recommendedAmount()//output
+    
+    /**
+     * Returns a string displaying recommended amount of water for user specified weight.
+     * @return returns a string for recommended water intake
+     */
+    public String recommendedAmount()
     {
         if (amountsOfWater == INVALID)
         { 
@@ -38,6 +48,11 @@ public class Water
             return "The recommended amount of water you should drink is: " + amountsOfWater + " ounces of water.";
         }
     }
+    
+    /**
+     * Amount of water user drinks is subtracted from recommended water intake.
+     * @param drinkThisAmount amount of water user drank
+     */
     public void drinkWater(double drinkThisAmount)
     {
         if (drinkThisAmount >= 0 && drinkThisAmount <= WATER_INTAKE_100)
@@ -69,6 +84,11 @@ public class Water
             howMuchWaterLeft = 0.0;
         }
     }
+    
+    /**
+     * Checks whether user has reached recommended amount of water intake.
+     * @return a string based on whether user has met water intake goal
+     */
     public String waterLeft()
     {
         if (howMuchWaterLeft == INVALID)
@@ -88,6 +108,8 @@ public class Water
         }
         return waterLeft;
     }
+    
+
     public Boolean congratulate()
     {
         if (waterLeft.contains("Congratulations"))
