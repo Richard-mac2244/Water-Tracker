@@ -1,0 +1,105 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
+
+public class WaterTester
+{
+    public static void main(String[] args)
+    {
+      Scanner scan = new Scanner(System.in);
+      System.out.print("What is your body weight? Please enter a valid number: ");
+      double weight = scan.nextDouble();
+      Water newUser = new Water(weight);
+      System.out.println();
+      while (newUser.recommendedAmount().equals("0"))
+      {
+          System.out.print("Please enter a valid number: ");
+          newUser = new Water(scan.nextDouble());
+          System.out.println();
+      }
+    
+      
+      List<Double> waterDrankList = new ArrayList<Double>();
+      
+     
+      System.out.print("Enter the amount of water you drank today. Please enter a valid number: ");
+      double amount = 0;
+      amount = scan.nextDouble();
+      waterDrankList.add(amount);
+      newUser.drinkWater(amount);
+      while (newUser.waterLeft().equals("0.000"))
+      {
+          System.out.println();
+          System.out.print("Please enter a valid number: ");
+          amount = scan.nextDouble();
+          waterDrankList.add(amount);
+          newUser.drinkWater(amount);
+      }
+      System.out.println();
+      System.out.println(newUser.waterLeft());
+      
+      
+      for (int i = 1; i<= waterDrankList.size(); i++)
+      {
+          while (newUser.congratulate().equals(false))
+          {
+              System.out.println();
+              System.out.println("Keep drinking!");
+              System.out.println();
+              System.out.print("Enter the amount of water you drank today. Please enter a valid number: "); 
+              amount = scan.nextDouble();
+              newUser.drinkWater(amount);
+              if (!newUser.waterLeft().equals("0.000"))
+              {
+                  waterDrankList.add(amount);
+                }
+              while (newUser.waterLeft().equals("0.000"))
+              {
+                  System.out.println();
+                  System.out.print("Please enter a valid number: ");
+                  amount = scan.nextDouble();
+                  newUser.drinkWater(amount);
+                  if (!newUser.waterLeft().equals("0.000"))
+                  {
+                      waterDrankList.add(amount);
+                  }
+              }
+              System.out.println();
+              System.out.println(newUser.waterLeft());
+          }
+      }
+      
+      System.out.println();
+      System.out.println("Total amount of water you drank through the day: " + waterDrankList);
+      
+      
+      Line lineX = new Line(50, waterDrankList.size() + 100, waterDrankList.size() * 10, waterDrankList.size() * 10);
+      lineX.setColor(Color.BLACK);
+      lineX.draw();
+      
+      Line lineY = new Line(50, 50, 50, waterDrankList.size() * 10);
+      lineY.setColor(Color.BLACK);
+      lineY.draw();
+      
+      Ellipse circle = new Ellipse(30, waterDrankList.size() * 10, 5, 5);
+      circle.setColor(Color.MAGENTA);
+      circle.fill();
+      for (int i = 0; i < (waterDrankList.size() ); i++)
+      {
+          if (i == 0)
+          {
+              circle.translate((i + 1) * 10, -waterDrankList.get(i));
+            }
+          else 
+          {
+              circle.translate((i/i) * 10, -waterDrankList.get(i));
+              Ellipse circleTrace = new Ellipse(circle.getX(), circle.getY(), 5, 5);
+              circleTrace.setColor(Color.MAGENTA);
+              circleTrace.fill();
+            }
+        }
+    }
+}
